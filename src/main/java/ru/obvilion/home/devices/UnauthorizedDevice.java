@@ -16,6 +16,8 @@ public class UnauthorizedDevice extends Device {
         packet_handlers.put(129, new VersionPacket());
     }
 
+    public String device_name;
+
     public short[] private_keys = { 1, 2, 3, 4 };
     public short[] public_keys = { 1, 2, 3, 4 };
 

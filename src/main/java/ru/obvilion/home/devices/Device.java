@@ -9,9 +9,15 @@ import java.util.Map;
 
 public abstract class Device {
     public ClientConnection client_connection;
+    public int version = -1;
 
     public Device(ClientConnection connection) {
         client_connection = connection;
+    }
+
+    public Device(UnauthorizedDevice device) {
+        client_connection = device.client_connection;
+        version = device.version;
     }
 
     public abstract Map<Integer, PacketHandler> getPacketHandlers();

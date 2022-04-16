@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class VersionPacket implements PacketHandler {
+
     @Override
     public void handle(Device device, DataInputStream is, int length) throws IOException {
         if (!(device instanceof UnauthorizedDevice)) {
@@ -19,8 +20,8 @@ public class VersionPacket implements PacketHandler {
 
         is.read(device_bytes);
 
-        String device_name = new String(device_bytes, StandardCharsets.US_ASCII);
-        int version = is.readUnsignedShort();
+        ((UnauthorizedDevice) device).device_name = new String(device_bytes, StandardCharsets.US_ASCII);
+        device.version = is.readUnsignedShort();
     }
 
     @Override

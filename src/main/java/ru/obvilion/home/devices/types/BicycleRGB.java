@@ -1,8 +1,8 @@
 package ru.obvilion.home.devices.types;
 
 import ru.obvilion.home.devices.Device;
+import ru.obvilion.home.devices.UnauthorizedDevice;
 import ru.obvilion.home.packets.PacketHandler;
-import ru.obvilion.home.socket.ClientConnection;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +10,12 @@ import java.util.Map;
 public class BicycleRGB extends Device {
     public static HashMap<Integer, PacketHandler> packet_handlers = new HashMap<>();
 
-    public BicycleRGB(ClientConnection connection) {
-        super(connection);
+    static {
+
+    }
+
+    public BicycleRGB(UnauthorizedDevice from) {
+        super(from);
     }
 
     @Override
