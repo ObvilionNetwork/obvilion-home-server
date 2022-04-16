@@ -1,5 +1,6 @@
-package ru.obvilion.home.devices;
+package ru.obvilion.home.devices.types;
 
+import ru.obvilion.home.devices.Device;
 import ru.obvilion.home.packets.PacketHandler;
 import ru.obvilion.home.socket.ClientConnection;
 

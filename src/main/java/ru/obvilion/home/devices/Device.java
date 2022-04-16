@@ -33,6 +33,6 @@ public abstract class Device {
             return;
         }
 
-        handler.handle(is, length - 2);
+        handler.handle(this, is, length - 2);
     }
 }

@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class ClientConnection {
+    public static final int[] delimiting_bytes = { 222, 111, 222 };
+
+    private Worker worker;
     private Socket client_socket;
     private Device device;
     private int wait_data = 0;
@@ -18,9 +21,23 @@ public class ClientConnection {
         device = new UnauthorizedDevice(this);
     }
 
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+
+    /**
+     * @return Client socket connection
+     */
     public Socket get() {
         return client_socket;
     }
+
 
     public void onData(InputStream is) throws IOException {
         byte mode = 0;
@@ -43,7 +60,7 @@ public class ClientConnection {
 
             // Проверка первого байта (222)
             if (mode == 0) {
-                if (is.read() == 222) {
+                if (is.read() == delimiting_bytes[0]) {
                     mode = 1;
                 }
 
@@ -52,7 +69,7 @@ public class ClientConnection {
 
             // Проверка второго байта (111)
             if (mode == 1) {
-                if (is.read() == 111) {
+                if (is.read() == delimiting_bytes[1]) {
                     mode = 2;
                 } else {
                     mode = 0;
@@ -62,7 +79,7 @@ public class ClientConnection {
             }
 
             // Проверка третьего байта (222)
-            if (is.read() == 222) {
+            if (is.read() == delimiting_bytes[2]) {
                 // Читает uint16_t - размер пакета
                 int size = (is.read() << 8) + is.read();
 

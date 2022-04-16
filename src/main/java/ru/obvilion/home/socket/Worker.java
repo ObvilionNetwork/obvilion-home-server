@@ -5,13 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Worker extends Thread {
-    public List<ClientConnection> client_sockets = new ArrayList<>();
+    public final List<ClientConnection> client_sockets = new ArrayList<>();
     public int delta;
+
+    public void addConnection(ClientConnection con) {
+        con.setWorker(this);
+        client_sockets.add(con);
+    }
 
     @Override
     public void run() {
         while (true) {
             long before = System.nanoTime();
+
             for (ClientConnection client : client_sockets) {
                 try {
                     if (client.get().getInputStream().available() > 0) {
@@ -22,15 +28,12 @@ public class Worker extends Thread {
                 }
             }
 
+            // Вычисляем время последней проверки
             delta = (int) (System.nanoTime() - before);
 
-            // Мимнимум 1 наносекунда, чтобы поспать и не грузить процессор
-            if (delta > 999) {
-                delta = 999;
-            }
-
             try {
-                Thread.sleep(0, 1000 - delta);
+                // 1 наносекунда сна для предотвращения большой загрузки ЦП
+                Thread.sleep(0, (delta > 999) ? (1) : (1000 - delta));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
