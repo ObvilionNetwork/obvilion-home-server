@@ -28,7 +28,7 @@ public class MessagePacket implements PacketHandler {
             String message = new String(message_bytes, StandardCharsets.US_ASCII);
 
             // TODO: put message to database
-            System.out.println("Device [" + device.getClass().getSimpleName() + "]: " + message);
+            System.out.println(device + ": " + message);
         }
     }
 

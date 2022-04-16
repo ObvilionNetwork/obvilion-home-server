@@ -9,6 +9,7 @@ import java.util.Map;
 
 public abstract class Device {
     public ClientConnection client_connection;
+    public String token;
     public int version = -1;
 
     public Device(ClientConnection connection) {
@@ -40,5 +41,13 @@ public abstract class Device {
         }
 
         handler.handle(this, is, length - 2);
+    }
+
+    @Override
+    public String toString() {
+        return "Device[" +
+            "ip=" + client_connection.get().getInetAddress() +
+            "version=" + version +
+        ']';
     }
 }

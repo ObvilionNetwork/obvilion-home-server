@@ -18,8 +18,8 @@ public class UnauthorizedDevice extends Device {
 
     public String device_name;
 
-    public short[] private_keys = { 1, 2, 3, 4 };
-    public short[] public_keys = { 1, 2, 3, 4 };
+    //public short[] private_keys = { 1, 2, 3, 4 };
+    //public short[] public_keys = { 1, 2, 3, 4 };
 
     public UnauthorizedDevice(ClientConnection connection) {
         super(connection);
