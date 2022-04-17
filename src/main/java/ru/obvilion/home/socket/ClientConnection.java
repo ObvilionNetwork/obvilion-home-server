@@ -31,6 +31,15 @@ public class ClientConnection {
     }
 
 
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
+
+
     /**
      * @return Client socket connection
      */

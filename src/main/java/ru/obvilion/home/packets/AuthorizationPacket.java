@@ -3,6 +3,7 @@ package ru.obvilion.home.packets;
 import ru.obvilion.home.devices.Device;
 import ru.obvilion.home.devices.DeviceVersions;
 import ru.obvilion.home.devices.UnauthorizedDevice;
+import ru.obvilion.home.utils.AuthorizationMethod;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -15,15 +16,20 @@ public class AuthorizationPacket implements PacketHandler {
             return;
         }
 
-        byte auth_method = DeviceVersions.getAuthMethod((UnauthorizedDevice) device);
+        AuthorizationMethod auth_method = DeviceVersions.getAuthMethod((UnauthorizedDevice) device);
 
-        if (auth_method == 0) {
+        if (auth_method == AuthorizationMethod.TOKEN_40_WITHOUT_SSL) {
             byte[] token_bytes = new byte[40];
             is.read(token_bytes);
 
             device.token = new String(token_bytes, StandardCharsets.US_ASCII);
         } else {
             System.err.println("Error during authorization " + device);
+            return;
         }
+
+        // Меняем тип девайса
+        Device result = DeviceVersions.fromUnauthorized((UnauthorizedDevice) device);
+        device.client_connection.setDevice(result);
     }
 }

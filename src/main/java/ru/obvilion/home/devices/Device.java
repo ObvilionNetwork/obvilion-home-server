@@ -29,14 +29,14 @@ public abstract class Device {
         PacketHandler handler = getPacketHandlers().get(type);
         if (handler == null) {
             // TODO: error handling
-            System.err.println("Handler for " + type + " not found for " + getClass().getSimpleName());
+            System.err.println("Handler for " + type + " not found for " + this);
             return;
         }
 
         if (handler.getMinLength() > length) {
             // TODO: error handling
             System.err.println("Handler " + handler.getClass().getSimpleName() + " min length more than packet size, " +
-                    "device: " + getClass().getSimpleName());
+                    "device: " + this);
             return;
         }
 
