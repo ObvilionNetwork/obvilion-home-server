@@ -22,6 +22,25 @@ public class QueueManager {
     }
 
     public void addWorker() {
+        int connections = 0;
+        for (Worker worker : workers) {
+            connections += worker.client_sockets.size();
+        }
 
+        int delta = connections / workers.size() - connections / (workers.size() + 1);
+
+        Worker new_worker = new Worker();
+
+        for (int i = 0; i < delta; i++) {
+            for (Worker worker : workers) {
+                if (worker.client_sockets.size() == 0) {
+                    continue;
+                }
+
+                new_worker.addConnection(worker.client_sockets.get(0));
+            }
+        }
+
+        workers.add(new_worker);
     }
 }
