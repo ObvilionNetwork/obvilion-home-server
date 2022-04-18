@@ -11,7 +11,7 @@ public class BicycleRGB extends Device {
     public static HashMap<Integer, PacketHandler> packet_handlers = new HashMap<>();
 
     static {
-
+        packet_handlers.putAll(default_packet_handlers);
     }
 
     public BicycleRGB(UnauthorizedDevice from) {

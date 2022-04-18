@@ -6,9 +6,9 @@ import java.util.List;
 
 public class QueueManager {
     List<Worker> workers = new ArrayList<>();
-    short min_workers, max_workers;
+    int min_workers, max_workers;
 
-    public QueueManager(short min_workers, short max_workers) {
+    public QueueManager(int min_workers, int max_workers) {
         this.min_workers = min_workers;
         this.max_workers = max_workers;
     }

@@ -1,6 +1,7 @@
 package ru.obvilion.home;
 
 import ru.obvilion.home.socket.ClientConnection;
+import ru.obvilion.home.socket.QueueManager;
 import ru.obvilion.home.socket.Worker;
 
 import java.io.IOException;
@@ -11,13 +12,12 @@ public class LaunchWrapper {
         try {
             ServerSocket server = new ServerSocket(1010);
 
-            Worker worker = new Worker();
-            worker.start();
+            QueueManager queue = new QueueManager(2, 8);
 
-            ClientConnection c = new ClientConnection(server.accept());
-            worker.client_sockets.add(c);
-
-            System.out.println("connected");
+            while (true) {
+                queue.addConnection(new ClientConnection(server.accept()));
+                System.out.println("Client connected");
+            }
         }
         catch (IOException e) {
             e.printStackTrace();

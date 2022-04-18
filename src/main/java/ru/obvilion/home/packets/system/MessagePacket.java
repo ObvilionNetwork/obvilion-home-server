@@ -1,7 +1,7 @@
-package ru.obvilion.home.packets;
+package ru.obvilion.home.packets.system;
 
 import ru.obvilion.home.devices.Device;
-import ru.obvilion.home.devices.UnauthorizedDevice;
+import ru.obvilion.home.packets.PacketHandler;
 
 import java.io.DataInputStream;
 import java.io.IOException;

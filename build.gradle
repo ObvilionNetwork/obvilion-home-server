@@ -4,7 +4,7 @@ plugins {
 
 String mainClassName = "ru.obvilion.home.LaunchWrapper"
 group 'ru.obvilion.home'
-version '0.0.1.0'
+version '0.0.1.1'
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
