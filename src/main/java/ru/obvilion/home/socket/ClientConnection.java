@@ -11,8 +11,8 @@ import java.net.Socket;
 public class ClientConnection {
     public static final int[] delimiting_bytes = { 222, 111, 222 };
 
+    private final Socket client_socket;
     private Worker worker;
-    private Socket client_socket;
     private Device device;
     private int wait_data = 0;
 
@@ -60,7 +60,7 @@ public class ClientConnection {
         // Проверяем пакет по схеме:
         // [222, 111, 222, SIZE; SIZE, PACKET_TYPE; PACKET_TYPE, ...]
         //                             ^ Размер пакета начинает считываться отсюда
-        if (is.available() < 6) {
+        if (is.available() < 7) {
             return;
         }
 
@@ -98,7 +98,8 @@ public class ClientConnection {
                     return;
                 }
 
-                device.onData(new DataInputStream(is), wait_data);
+                device.onData(new DataInputStream(is), size);
+                break;
             } else {
                 mode = 0;
             }

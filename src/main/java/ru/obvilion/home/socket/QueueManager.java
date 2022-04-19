@@ -11,6 +11,10 @@ public class QueueManager {
     public QueueManager(int min_workers, int max_workers) {
         this.min_workers = min_workers;
         this.max_workers = max_workers;
+
+        for (int i = 0; i < min_workers; i++) {
+            workers.add(new Worker());
+        }
     }
 
     public void addConnection(ClientConnection connection) {

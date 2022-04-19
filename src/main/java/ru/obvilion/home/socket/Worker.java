@@ -8,6 +8,10 @@ public class Worker extends Thread {
     public final List<ClientConnection> client_sockets = new ArrayList<>();
     public int delta;
 
+    public Worker() {
+        start();
+    }
+
     public void addConnection(ClientConnection con) {
         con.setWorker(this);
         client_sockets.add(con);
@@ -19,6 +23,11 @@ public class Worker extends Thread {
             long before = System.nanoTime();
 
             for (ClientConnection client : client_sockets) {
+                if (client.get().isClosed()) {
+                    client_sockets.remove(client);
+                    continue;
+                }
+
                 try {
                     if (client.get().getInputStream().available() > 0) {
                         client.onData(client.get().getInputStream());
