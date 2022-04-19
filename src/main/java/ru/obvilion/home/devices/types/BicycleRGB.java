@@ -12,6 +12,7 @@ public class BicycleRGB extends Device {
 
     static {
         packet_handlers.putAll(default_packet_handlers);
+        // TODO: device packets
     }
 
     public BicycleRGB(UnauthorizedDevice from) {

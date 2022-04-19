@@ -23,7 +23,10 @@ public class AuthorizationPacket implements PacketHandler {
             byte[] token_bytes = new byte[40];
             is.read(token_bytes);
 
+            // TODO: unchecked
             device.token = new String(token_bytes, StandardCharsets.US_ASCII);
+
+            // TODO: verify token
         } else {
             System.err.println("Error during authorization " + device);
             return;
@@ -32,5 +35,10 @@ public class AuthorizationPacket implements PacketHandler {
         // Меняем тип девайса
         Device result = DeviceVersions.fromUnauthorized((UnauthorizedDevice) device);
         device.client_connection.setDevice(result);
+    }
+
+    @Override
+    public int getMinLength() {
+        return 40;
     }
 }

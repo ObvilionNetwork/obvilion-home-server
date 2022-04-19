@@ -55,7 +55,7 @@ public abstract class Device {
     @Override
     public String toString() {
         return "Device[" +
-            "ip=" + client_connection.get().getInetAddress() +
+            "ip=" + client_connection.get().getInetAddress() + ", " +
             "version=" + version +
         ']';
     }
