@@ -16,11 +16,13 @@ public class Client {
         write(0, 129);
 
         // Device name length
-        write(4);
+        write(8);
         // Device name
-        write('t', 'e', 's', 't');
+        write('R', 'G', 'B', 'S', 't', 'r', 'i', 'p');
         // Device version
         write(0, 1);
+
+
 
         while (true) {
             Thread.sleep(1);
