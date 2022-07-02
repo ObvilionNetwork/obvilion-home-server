@@ -1,4 +1,4 @@
-package ru.obvilion.home.db;
+package ru.obvilion.home.database;
 
 public class DatabaseSettings {
     public final String host, database, user, password;

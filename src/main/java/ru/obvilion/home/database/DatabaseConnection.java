@@ -1,4 +1,4 @@
-package ru.obvilion.home.db;
+package ru.obvilion.home.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
