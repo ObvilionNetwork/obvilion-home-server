@@ -1,6 +1,6 @@
 package ru.obvilion.home.devices;
 
-import ru.obvilion.home.devices.types.BicycleRGB;
+import ru.obvilion.home.devices.types.RGBStrip;
 import ru.obvilion.home.utils.AuthorizationMethod;
 
 public class DeviceVersions {
@@ -26,7 +26,7 @@ public class DeviceVersions {
 
         switch (from.device_name) {
             case "BicycleRGB":
-                return new BicycleRGB(from);
+                return new RGBStrip(from);
             default:
                 throw new IllegalStateException("Unexpected value: " + from.device_name);
         }
